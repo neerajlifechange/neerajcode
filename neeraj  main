@@ -39,14 +39,15 @@ async def start(name, user, wait_time, meetingcode, passcode):
         except Exception as e:
             pass
 
-       try:
+        try:
             query = '//button[text()="Join Audio by Computer"]'
-            await asyncio.sleep(13)
-            mic_button_locator = await page.wait_for_selector(query, timeout=200000)
-            mic_button_locator = await page.wait_for_selector(query, timeout=2)
-            await asyncio.sleep(10)
-            await mic_button_locator.evaluate_handle('node => node.click()')
+           
+            mic_button_locator = await page.wait_for_selector(query, timeout=400000)
+          
+            await mic_button_locator.evaluate_handle()
             print(f"{name} mic aayenge.")
+        except Exception as e:
+            print(f"{name} mic nahe aayenge. ", )
 
         print(f"{name} sleep for {wait_time} seconds ...")
         while running and wait_time > 0:
