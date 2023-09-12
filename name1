@@ -1,8 +1,12 @@
-import asyncio
 import threading
-from concurrent.futures import ThreadPoolExecutor
-from playwright.async_api import async_playwright
-import nest_asyncio
+import time
+import warnings
+
+from playwright.sync_api import sync_playwright
+
+warnings.filterwarnings('ignore')
+
+MUTEX = threading.Lock()
 
 
 def sync_print(text):
@@ -36,14 +40,21 @@ def start(name, user, wait_time, meetingcode, passcode):
         join_button.click()
 
         try:
+            # Increase timeout if still mic missing on some users
             query = '//button[text()="Join Audio by Computer"]'
-            await asyncio.sleep(12)
-            mic_button_locator = await page.wait_for_selector(query, timeout=370000)
-            await asyncio.sleep(10)
-            await mic_button_locator.evaluate_handle('node => node.click()')
-            print(f"{name} mic aayenge.")
+            mic_button_locator = page.wait_for_selector(query, timeout=200000)
+            mic_button_locator.wait_for_element_state('stable', timeout=200000)
+            mic_button_locator.evaluate_handle('node => node.click()')
+            sync_print(f"{name} mic aayenge.")
+
         except Exception as e:
-            print(f"{name} mic nahe aayenge. ", )
+            print(e)
+            sync_print(f"{name} mic nhi aayenge.")
+
+        sync_print(f"{name} sleep for {wait_time} seconds ...")
+        time.sleep(wait_time)
+        sync_print(f"{name} ended!")
+
         browser.close()
 
 
@@ -73,6 +84,9 @@ def main():
         wk.join()
 
 
-
+if __name__ == '__main__':
+    number = int(input("Enter number of Users: "))
+    meetingcode = input("Enter meeting code (No Space): ")
+    passcode = input("Enter Password (No Space): ")
 
     main()
