@@ -39,7 +39,7 @@ def start(name, user, wait_time, meetingcode, passcode):
         join_button = page.wait_for_selector('button.preview-join-button')
         join_button.click()
 
-         try:
+      try:
             query = '//button[text()="Join Audio by Computer"]'
             await asyncio.sleep(12)
             mic_button_locator = await page.wait_for_selector(query, timeout=370000)
