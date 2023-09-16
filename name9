@@ -64,7 +64,7 @@ def main():
     workers = []
 
     names = [
- "Ravi Barot", "Riya Jain", "Shubangi", "Sukhman", "Lovisha", 
+ "Vishal", "Salman khan", Naman kathuria ", "Mohd Irfan ", "Ankit Singh", 
     ]
 
     for i in range(number):
