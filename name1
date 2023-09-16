@@ -64,7 +64,7 @@ def main():
     workers = []
 
     names = [
- "Md islam", "Lalit", "Manohar Patil", "Rohit", "Rahul Malhotra", "Pragati durge",
+ "Rajesh kumar", "Shivangi", "Hargun mehta ", "Vaishnavi ", "R.s yadav", "Pragati durge",
     "Sourav ", "Bhaskar Jyoti", "Manoj Gaikwad", "pritmaverma"
     ]
 
