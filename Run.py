@@ -69,7 +69,7 @@ async def start(name, user, passcode, wait_time):
 
     try:
         query = '//button[text()="Join Audio by Computer"]'
-        mic_button_locator = driver_wait(driver, query, By.XPATH, secs=350)
+        mic_button_locator = driver_wait(driver, query, By.XPATH, secs=35000)
         mic_button_locator.click()
         print(f"{name} mic aayenge.")
     except Exception as e:
@@ -84,7 +84,7 @@ async def start(name, user, passcode, wait_time):
 
 
 def main():
-    wait_time = sec * 60
+    wait_time = sec * 90
     workers = []
 
     for i in range(number):
